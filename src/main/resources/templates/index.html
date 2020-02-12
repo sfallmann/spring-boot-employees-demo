@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employee Demo</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app"></div>
+	<script>
+new Vue({
+	el: "#app",
+	template: `
+		<div>
+			<div v-for="(employee, index) in employees" :key="index"> {{ employee.firstName }} {{employee.lastName }}</div>
+		</div>
+	`,
+	data() {
+		return {
+			employees: [],
+		}
+	},
+	async mounted() {	
+		const res = await fetch("/employees");
+		this.employees = await res.json();	
+	},
+});
+
+</script>
+</body>
+</html>
